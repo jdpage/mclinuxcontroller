@@ -81,11 +81,14 @@ int main(int argc, char **argv) {
 					case 1:
 						k = XK_Escape;
 						break;
-					case 3:
+					case 11:
 						k = XK_space;
 						break;
 					case 2:
 						k = XK_Shift_L;
+						break;
+					case 3:
+						k = XK_q;
 						break;
 					case 6:
 						if (ev[i].value) {
@@ -162,7 +165,8 @@ int main(int argc, char **argv) {
 domouse:
 		gettimeofday(&t, NULL);
 		if (tdiff(t, last_t) > 16) {
-			XTestFakeRelativeMotionEvent((Display *)dpy, mouse.x / 0xfff, mouse.y / 0xfff, 0);
+			#define SPEED 0x400
+			XTestFakeRelativeMotionEvent((Display *)dpy, mouse.x / SPEED, mouse.y / SPEED, 0);
 			XFlush((Display *)dpy);
 			last_t = t;
 		}
